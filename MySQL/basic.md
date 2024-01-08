@@ -16,7 +16,7 @@ Query Details | Query
 -|-
 Create Table | `Crate table <table_name> (<key1> <key_dataType> Primary key, <key2> <key_dataType>, <key3> <key_datatype>, ... );`
 Show Table Information | `desc <table_name>;`
-Delete a Table| ``
+Delete a Table| `drop table <table_name>`
 
 ### 3. Insert/Update data into table
 Query Details | Query
@@ -26,3 +26,12 @@ Update data in sql table | `update <table_name> set <key5> = <value_of_key5> whe
 Delete a data in sql table | ``
 Show data with some condition | `select * from <table_name> where <condition_info_in_sql_format>;`
 
+
+### Joining 
+Query Details | Query
+-|-
+Inner Join | `SELECT * FROM <table_1> T1 INNER JOIN <table_2> T2 ON T1.<Foregian_Key> = T2.<Foregian_Key>;` <br> or <br> `SELECT * FROM <table_1> T1 JOIN <table_2> T2 ON T1.<Foregian_Key> = T2.<Foregian_Key>;`
+Left Outer Join | `SELECT * FROM <table_1> T1 LEFT OUTER JOIN <table_2> T2 ON T1.<Foregian_Key> = T2.<Foregian_Key>;` <br> or <br> `SELECT * FROM <table_1> T1 LEFT JOIN <table_2> T2 ON T1.<Foregian_Key> = T2.<Foregian_Key>;`
+Right Outer Join | `SELECT * FROM <table_1> T1 RIGHT OUTER JOIN <table_2> T2 ON T1.<Foregian_Key> = T2.<Foregian_Key>;` <br> or <br> `SELECT * FROM <table_1> T1 RIGHT JOIN <table_2> T2 ON T1.<Foregian_Key> = T2.<Foregian_Key>;`
+Full/Both Outer Join | `(SELECT * FROM <table_1> T1 LEFT OUTER JOIN <table_2> T2 ON T1.<Foregian_Key> = T2.<Foregian_Key>)    UNION       (SELECT * FROM <table_1> T1 RIGHT OUTER JOIN <table_2> T2 ON T1.<Foregian_Key> = T2.<Foregian_Key>);`
+Cross Join | `SELECT T1.<key_i> T2.<key_j> FROM <table_1> T1 CROSS JOIN <table_2> T2 ON T1.<Foregian_Key> = T2.<Foregian_Key>`

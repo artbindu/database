@@ -1,10 +1,12 @@
-## DBMS Assignment - 1
+
+## DBMS Assignment - 1 (Basic Query)
 ---
 
-### 1. Table Info:
+####  Table Info:
 - empinfo (empno, ename, hiredate, job, mgr, sal, comm, deptno )
 - deptinfo (deptno, dname, location)
 
+#### Assignment List
 1. List the names and code of all employees.
 2. List the names, employee code and department code of all clerks.
 3. List the names, employee code and salary of all managers.
@@ -22,18 +24,4 @@
 15. List all managers who earn more than Rs. 4000/-
 16. List all clerks and salesman who earn more than Rs. 1600/-
 17. List the names and salaries of all employees who were joined as manager during 1981.
-
------
-----
-
-### Solution:
-- create table empinfo (empno varchar(10) primary key, ename varchar(30), hiredate date, job varchar(20), mgr varchar(30), sal int, comm BOOLEAN, deptno varchar(10));
-- create table deptinfo (deptno varchar(10) primary key, dname varchar(30), location varchar(50));
-
-Entry Dummy Data:
-- insert into empinfo (empno, ename, hiredate, job, mgr, sal, deptno)
-  values('emp01', 'Employee Name', '2022-11-23', 
-  'Job Name', 'Manager Name', 12345, 'dept01')
-  
-
-https://www.youtube.com/watch?v=TvLcjWnJWh4&t=140
+18. List the names and salaries of all employees whose salary is even
