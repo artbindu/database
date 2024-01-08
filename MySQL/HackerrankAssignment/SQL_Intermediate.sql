@@ -174,6 +174,7 @@ select C.country_id, sum(Cu1.city_cus_tprice) as cuntry_total_cus_price, sum(Cu1
 select Cn.id as Cn_id_left, Cn.country_name, C1.country_id as Cn_id_right, 
 		C1.cuntry_total_cus_price, C1.cuntry_total_cus_invoice, (C1.cuntry_total_cus_price/C1.cuntry_total_cus_invoice) as cuntry_total_avg_price
 	from 
+    
 			Country Cn
 		inner join
 			(select C.country_id, sum(Cu1.city_cus_tprice) as cuntry_total_cus_price, sum(Cu1.city_cus_tinvoice) as cuntry_total_cus_invoice
