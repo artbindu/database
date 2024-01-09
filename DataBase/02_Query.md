@@ -1,0 +1,812 @@
+SQL, 
+#### SQL HOME 
+
+#### SQL Intro 
+
+#### SQL Syntax 
+
+#### SQL Select 
+
+#### SQL Select Distinct 
+
+#### SQL Where 
+
+#### SQL Order By 
+
+#### SQL And 
+
+#### SQL Or 
+
+#### SQL Not 
+
+#### SQL Insert Into 
+
+#### SQL Null Values 
+
+#### SQL Update 
+
+#### SQL Delete 
+
+#### SQL Select Top 
+
+#### SQL Min and Max 
+
+#### SQL Count 
+
+#### SQL Sum 
+
+#### SQL Avg 
+
+#### SQL Like 
+
+#### SQL Wildcards 
+
+#### SQL In 
+
+#### SQL Between 
+
+#### SQL Aliases 
+
+#### SQL Joins 
+
+#### SQL Inner Join 
+
+#### SQL Left Join 
+
+#### SQL Right Join 
+
+#### SQL Full Join 
+
+#### SQL Self Join 
+
+#### SQL Union 
+
+#### SQL Group By 
+
+#### SQL Having 
+
+#### SQL Exists 
+
+#### SQL Select Into 
+
+#### SQL Insert Into Select 
+
+#### SQL Case 
+
+#### SQL Null Functions 
+
+#### SQL Stored Procedures 
+
+#### SQL Comments 
+
+#### SQL Operators 
+
+#### SQL 
+
+
+
+#### SQL Create DB 
+
+#### SQL Drop DB 
+
+#### SQL Backup DB 
+
+#### SQL Create Table 
+
+#### SQL Drop Table 
+
+#### SQL Alter Table 
+
+#### SQL Constraints 
+
+#### SQL Not Null 
+
+#### SQL Unique 
+
+#### SQL Primary Key 
+
+#### SQL Foreign Key 
+
+#### SQL Check 
+
+#### SQL Default 
+
+#### SQL Index 
+
+#### SQL Auto Increment 
+
+#### SQL Dates 
+
+#### SQL Views 
+
+#### SQL Injection 
+
+#### SQL Hosting 
+
+#### SQL Data Types 
+
+#### SQL 
+
+#### SQL Keywords 
+
+#### ADD 
+
+#### ADD CONSTRAINT 
+
+#### ALL 
+
+#### ALTER 
+
+#### ALTER COLUMN 
+
+#### ALTER TABLE 
+
+#### AND 
+
+#### ANY 
+
+#### AS 
+
+#### ASC 
+
+#### BACKUP DATABASE 
+
+#### BETWEEN 
+
+#### CASE 
+
+#### CHECK 
+
+#### COLUMN 
+
+#### CONSTRAINT 
+
+#### CREATE 
+
+#### CREATE DATABASE 
+
+#### CREATE INDEX 
+
+#### CREATE OR REPLACE VIEW 
+
+#### CREATE TABLE 
+
+#### CREATE PROCEDURE 
+
+#### CREATE UNIQUE INDEX 
+
+#### CREATE VIEW 
+
+#### DATABASE 
+
+#### DEFAULT 
+
+#### DELETE 
+
+#### DESC 
+
+#### DISTINCT 
+
+#### DROP 
+
+#### DROP COLUMN 
+
+#### DROP CONSTRAINT 
+
+#### DROP DATABASE 
+
+#### DROP DEFAULT 
+
+#### DROP INDEX 
+
+#### DROP TABLE 
+
+#### DROP VIEW 
+
+#### EXEC 
+
+#### EXISTS 
+
+#### FOREIGN KEY 
+
+#### FROM 
+
+#### FULL OUTER JOIN 
+
+#### GROUP BY 
+
+#### HAVING 
+
+#### IN 
+
+#### INDEX 
+
+#### INNER JOIN 
+
+#### INSERT INTO 
+
+#### INSERT INTO SELECT 
+
+#### IS NULL 
+
+#### IS NOT NULL 
+
+#### JOIN 
+
+#### LEFT JOIN 
+
+#### LIKE 
+
+#### LIMIT 
+
+#### NOT 
+
+#### NOT NULL 
+
+#### OR 
+
+#### ORDER BY 
+
+#### OUTER JOIN 
+
+#### PRIMARY KEY 
+
+#### PROCEDURE 
+
+#### RIGHT JOIN 
+
+#### ROWNUM 
+
+#### SELECT 
+
+#### SELECT DISTINCT 
+
+#### SELECT INTO 
+
+#### SELECT TOP 
+
+#### SET 
+
+#### TABLE 
+
+#### TOP 
+
+#### TRUNCATE TABLE 
+
+#### UNION 
+
+#### UNION ALL 
+
+#### UNIQUE 
+
+#### UPDATE 
+
+#### VALUES 
+
+#### VIEW 
+
+#### WHERE 
+
+#### MySQL Functions 
+
+#### ASCII 
+
+#### CONCAT 
+
+#### FIELD 
+
+#### FORMAT 
+
+#### INSERT 
+
+#### INSTR 
+
+#### LCASE 
+
+#### LEFT 
+
+#### LENGTH 
+
+#### LOCATE 
+
+#### LOWER 
+
+#### LPAD 
+
+#### LTRIM 
+
+#### MID 
+
+#### POSITION 
+
+#### REPEAT 
+
+#### REPLACE 
+
+#### REVERSE 
+
+#### RIGHT 
+
+#### RPAD 
+
+#### RTRIM 
+
+#### SPACE 
+
+#### STRCMP 
+
+#### SUBSTR 
+
+#### SUBSTRING 
+
+#### TRIM 
+
+#### UCASE 
+
+#### UPPER 
+
+#### ABS 
+
+#### ACOS 
+
+#### ASIN 
+
+#### ATAN 
+
+#### AVG 
+
+#### CEIL 
+
+#### CEILING 
+
+#### COS 
+
+#### COT 
+
+#### COUNT 
+
+#### DEGREES 
+
+#### DIV 
+
+#### EXP 
+
+#### FLOOR 
+
+#### GREATEST 
+
+#### LEAST 
+
+#### LN 
+
+#### LOG 
+
+#### MAX 
+
+#### MIN 
+
+#### MOD 
+
+#### PI 
+
+#### POW 
+
+#### POWER 
+
+#### RADIANS 
+
+#### RAND 
+
+#### ROUND 
+
+#### SIGN 
+
+#### SIN 
+
+#### SQRT 
+
+#### SUM 
+
+#### TAN 
+
+#### TRUNCATE 
+
+#### ADDDATE 
+
+#### ADDTIME 
+
+#### CURDATE 
+
+#### CURTIME 
+
+#### DATE 
+
+#### DATEDIFF 
+
+#### DAY 
+
+#### DAYNAME 
+
+#### DAYOFMONTH 
+
+#### DAYOFWEEK 
+
+#### DAYOFYEAR 
+
+#### EXTRACT 
+
+#### HOUR 
+
+#### LOCALTIME 
+
+#### LOCALTIMESTAMP 
+
+#### MAKEDATE 
+
+#### MAKETIME 
+
+#### MICROSECOND 
+
+#### MINUTE 
+
+#### MONTH 
+
+#### MONTHNAME 
+
+#### NOW 
+
+#### QUARTER 
+
+#### SECOND 
+
+#### SUBDATE 
+
+#### SUBTIME 
+
+#### SYSDATE 
+
+#### TIME 
+
+#### TIMEDIFF 
+
+#### TIMESTAMP 
+
+#### WEEK 
+
+#### WEEKDAY 
+
+#### WEEKOFYEAR 
+
+#### YEAR 
+
+#### YEARWEEK 
+
+#### BIN 
+
+#### BINARY 
+
+#### CASE 
+
+#### CAST 
+
+#### COALESCE 
+
+#### CONV 
+
+#### CONVERT 
+
+#### DATABASE 
+
+#### IF 
+
+#### IFNULL 
+
+#### ISNULL 
+
+#### NULLIF 
+
+#### USER 
+
+#### VERSION 
+
+#### SQL Server Functions 
+
+#### ASCII 
+
+#### CHAR 
+
+#### CHARINDEX 
+
+#### CONCAT 
+
+#### DATALENGTH 
+
+#### DIFFERENCE 
+
+#### FORMAT 
+
+#### LEFT 
+
+#### LEN 
+
+#### LOWER 
+
+#### LTRIM 
+
+#### NCHAR 
+
+#### PATINDEX 
+
+#### QUOTENAME 
+
+#### REPLACE 
+
+#### REPLICATE 
+
+#### REVERSE 
+
+#### RIGHT 
+
+#### RTRIM 
+
+#### SOUNDEX 
+
+#### SPACE 
+
+#### STR 
+
+#### STUFF 
+
+#### SUBSTRING 
+
+#### TRANSLATE 
+
+#### TRIM 
+
+#### UNICODE 
+
+#### UPPER 
+
+#### ABS 
+
+#### ACOS 
+
+#### ASIN 
+
+#### ATAN 
+
+#### AVG 
+
+#### CEILING 
+
+#### COUNT 
+
+#### COS 
+
+#### COT 
+
+#### DEGREES 
+
+#### EXP 
+
+#### FLOOR 
+
+#### LOG 
+
+#### MAX 
+
+#### MIN 
+
+#### PI 
+
+#### POWER 
+
+#### RADIANS 
+
+#### RAND 
+
+#### ROUND 
+
+#### SIGN 
+
+#### SIN 
+
+#### SQRT 
+
+#### SQUARE 
+
+#### SUM 
+
+#### TAN 
+
+#### DATEADD 
+
+#### DATEDIFF 
+
+#### DATEFROMPARTS 
+
+#### DATENAME 
+
+#### DATEPART 
+
+#### DAY 
+
+#### GETDATE 
+
+#### GETUTCDATE 
+
+#### ISDATE 
+
+#### MONTH 
+
+#### SYSDATETIME 
+
+#### YEAR 
+
+#### Advanced Functions 
+
+#### CAST 
+
+#### COALESCE 
+
+#### CONVERT 
+
+#### IIF 
+
+#### ISNULL 
+
+#### ISNUMERIC 
+
+#### NULLIF 
+
+#### SESSIONPROPERTY 
+
+#### MS Access Functions 
+
+#### Asc 
+
+#### Chr 
+
+#### CurDir 
+
+#### Format 
+
+#### InStr 
+
+#### InstrRev 
+
+#### LCase 
+
+#### Left 
+
+#### Len 
+
+#### LTrim 
+
+#### Mid 
+
+#### Replace 
+
+#### Right 
+
+#### RTrim 
+
+#### Space 
+
+#### Split 
+
+#### Str 
+
+#### StrComp 
+
+#### StrConv 
+
+#### StrReverse 
+
+#### Trim 
+
+#### UCase 
+
+#### Abs 
+
+#### Atn 
+
+#### Avg 
+
+#### Cos 
+
+#### Count 
+
+#### Exp 
+
+#### Fix 
+
+#### Format 
+
+#### Int 
+
+#### Max 
+
+#### Min 
+
+#### Randomize 
+
+#### Rnd 
+
+#### Round 
+
+#### Sgn 
+
+#### Sqr 
+
+#### Sum 
+
+#### Val 
+
+#### Date 
+
+#### DateAdd 
+
+#### DateDiff 
+
+#### DatePart 
+
+#### DateSerial 
+
+#### DateValue 
+
+#### Day 
+
+#### Format 
+
+#### Hour 
+
+#### Minute 
+
+#### Month 
+
+#### MonthName 
+
+#### Now 
+
+#### Second 
+
+#### Time 
+
+#### TimeSerial 
+
+#### TimeValue 
+
+#### Weekday 
+
+#### WeekdayName 
+
+#### Year 
+
+#### CurrentUser 
+
+#### Environ 
+
+#### IsDate 
+
+#### IsNull 
+
+#### IsNumeric 
+
+#### SQL Quick Ref 
+
+#### SQL 
+
+#### SQL Examples 
+
+#### SQL Editor 
+
+#### SQL Quiz 
+
+#### SQL Exercises 
+
+#### SQL Server 
+
+#### SQL Bootcamp 
+
+#### SQL Certificate

@@ -89,9 +89,7 @@ select E.ename 'Emp Name', E.empno 'Emp No', E1.ename 'Manager Name', E1.empno '
 -- 16. List the name of the employee who joined in their same year of 'Gopal'
 select hiredate from empinfo where ename like 'Gopal%';
 select ename from empinfo 
-	where hiredate like REGEXP "(
-		select hiredate from empinfo where ename like 'Gopal%'
-    )";
+	where hiredate like REPLACE(select hiredate from empinfo where ename like 'Gopal%', '(\-\d{2}){2}', '');
 
 -- 17. List the name of the employee who joined in their same month of 'BLAKE'
 -- 18. List the name of the employee who joined in their same month of 'ADAMAS'
