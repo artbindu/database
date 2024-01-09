@@ -88,18 +88,18 @@ create table Invoice (
 		id int(10) primary key, invoice_number varchar(255),
         customer_id int(10), user_account_id int(10), total_price decimal(8,2)
 	);
-    
+-- Country (id(int) pk, country_name(string))
 insert into Country values (1, 'Austria');
 insert into Country values (2, 'Germany');
 insert into Country values (3, 'United Kingdom');
 select * from Country;
-
+-- 			City (id pk, city_name, postal_code, country_id fk(Country))
 insert into City values (1, 'Wien', 1010, 1);
 insert into City values (2, 'Berlin', 10115, 2);
 insert into City values (3, 'Humburg', 20095, 2);
 insert into City values (4, 'London', 'EC4V 4AD', 3);
 select * from City;
-
+-- 			Customer (id pk, customer_name, city_id fk(City), customer_address, contact_person, email, phone, is_active)
 insert into Customer values (1, 'Drogerie Wien', 1, 'Deckergass 15A', 'Email Steinbech', 'dw@email.com', '+98765', 1);
 insert into Customer values (2, 'Cosmetic Store', 4, 'CS 34', 'J Corbyn', 'cs@email.com', '+25345', 1);
 insert into Customer values (3, 'Kosmetikstudio', 3, 'KS 33', 'W Brandt', 'ds@email.com', '+45444', 1);
@@ -110,7 +110,7 @@ insert into Customer values (7, 'Natural Cosmetics', 4, 'cosmic strick, 15B', 'G
 insert into Customer values (8, 'Kosmetik Plus', 2, '15C', 'A merkel', 'kp@email.com', '+8970657', 1);
 insert into Customer values (9, 'New Line Cosmetics', 4, '18A mannual Road', 'P Peter', 'nlc@email.com', '+456889', 1);
 select * from Customer;
-
+-- 		Invoice (id pk, invoice_number, customer_id  fk, user_account_id, total_price)
 insert into Invoice values (1, 'inv001', 7, 4, 1436);
 insert into Invoice values (2, 'inv002', 9, 2, 1000);
 insert into Invoice values (3, 'inv003', 3, 2, 360);
@@ -121,8 +121,9 @@ select * from Invoice;
 
 /*
 For each country, display the country name, total number of invoices, and their average amount. 
-Format the average as a floating-point number with 6 decimal places. Return only those 
-countries where their average invoice amount is greater than the average invoice amount over all invoices.
+Format the average as a floating-point number with 6 decimal places. 
+Return only those countries where 
+		their average invoice amount > the average invoice amount over all invoices.
 */
 
 -- Invoice table total price of purches price according to customer
@@ -173,8 +174,7 @@ select C.country_id, sum(Cu1.city_cus_tprice) as cuntry_total_cus_price, sum(Cu1
 -- Merge Country & City table to find
 select Cn.id as Cn_id_left, Cn.country_name, C1.country_id as Cn_id_right, 
 		C1.cuntry_total_cus_price, C1.cuntry_total_cus_invoice, (C1.cuntry_total_cus_price/C1.cuntry_total_cus_invoice) as cuntry_total_avg_price
-	from 
-    
+	from
 			Country Cn
 		inner join
 			(select C.country_id, sum(Cu1.city_cus_tprice) as cuntry_total_cus_price, sum(Cu1.city_cus_tinvoice) as cuntry_total_cus_invoice
@@ -191,6 +191,72 @@ select Cn.id as Cn_id_left, Cn.country_name, C1.country_id as Cn_id_right,
 					on C.id = Cu1.city_id
 				group by C.country_id) C1
 		on Cn.id = C1.country_id;
+        
+select Cn.country_name as "country name", C1.cuntry_total_cus_invoice as "total number of invoices",
+	(C1.cuntry_total_cus_price/C1.cuntry_total_cus_invoice) as "average amount"
+	from	Country Cn
+		inner join
+			(select C.country_id, sum(Cu1.city_cus_tprice) as cuntry_total_cus_price, sum(Cu1.city_cus_tinvoice) as cuntry_total_cus_invoice
+				from	City C
+					inner join
+						(select Cu.city_id, sum(I1.cus_tprice) as city_cus_tprice, sum(I1.cus_tinvoice) as city_cus_tinvoice, count(Cu.city_id) as city_tcustomer
+							from 
+									Customer Cu
+								inner join 
+									(select I.customer_id, sum(I.total_price) as cus_tprice, count(I.id) as cus_tinvoice from Invoice I group by I.customer_id) I1
+								on Cu.id = I1.customer_id
+							group by Cu.city_id) Cu1
+					on C.id = Cu1.city_id
+				group by C.country_id) C1
+		on Cn.id = C1.country_id
+	where (C1.cuntry_total_cus_price/C1.cuntry_total_cus_invoice) > (
+			select (tPrice/tInvoice) from (    
+                select sum(C1.cuntry_total_cus_price) as tPrice, sum(C1.cuntry_total_cus_invoice) as tInvoice
+							from	Country Cn
+								inner join
+									(select C.country_id, sum(Cu1.city_cus_tprice) as cuntry_total_cus_price, sum(Cu1.city_cus_tinvoice) as cuntry_total_cus_invoice
+										from	City C
+											inner join
+												(select Cu.city_id, sum(I1.cus_tprice) as city_cus_tprice, sum(I1.cus_tinvoice) as city_cus_tinvoice, count(Cu.city_id) as city_tcustomer
+													from 	Customer Cu
+														inner join 
+															(select I.customer_id, sum(I.total_price) as cus_tprice, count(I.id) as cus_tinvoice from Invoice I group by I.customer_id) I1
+														on Cu.id = I1.customer_id
+													group by Cu.city_id) Cu1
+											on C.id = Cu1.city_id
+										group by C.country_id) C1
+								on Cn.id = C1.country_id
+			) as avgPrice
+		);
+                
+                
+            select (tPrice/tInvoice) from (    
+                select sum(C1.cuntry_total_cus_price) as tPrice, sum(C1.cuntry_total_cus_invoice) as tInvoice
+							from	Country Cn
+								inner join
+									(select C.country_id, sum(Cu1.city_cus_tprice) as cuntry_total_cus_price, sum(Cu1.city_cus_tinvoice) as cuntry_total_cus_invoice
+										from	City C
+											inner join
+												(select Cu.city_id, sum(I1.cus_tprice) as city_cus_tprice, sum(I1.cus_tinvoice) as city_cus_tinvoice, count(Cu.city_id) as city_tcustomer
+													from 	Customer Cu
+														inner join 
+															(select I.customer_id, sum(I.total_price) as cus_tprice, count(I.id) as cus_tinvoice from Invoice I group by I.customer_id) I1
+														on Cu.id = I1.customer_id
+													group by Cu.city_id) Cu1
+											on C.id = Cu1.city_id
+										group by C.country_id) C1
+								on Cn.id = C1.country_id
+				) as avgPrice;
+/*
+For each country, 
+	display the 
+			country name, 
+            total number of invoices, 
+            their average amount. 
+Format the average as a floating-point number with 6 decimal places. 
+Return only those countries where 
+		their average invoice amount > the average invoice amount over all invoices.
+*/
 
     
 
