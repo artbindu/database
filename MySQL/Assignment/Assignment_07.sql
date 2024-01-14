@@ -38,9 +38,15 @@ WITH dept_wise_sal_indexing AS (
 		WHERE row_num <= 2;
 
 -- 5. List the years and the number of people joining in the year
-select REGEX_REPLACE(hiredate, '
--- 6. Give an increment of 20% to all employee who have joined before 1/1/82 or earner less than Rs. 3000/-
+select REGEXP_SUBSTR(hiredate, '\\d{4}') as year, count(empno) as "No of Employeee" from empinfo group by year order by year asc;
+
+-- 6. Give an increment of 20% to all employee who have joined before 1/1/03 or earner less than Rs. 4000/-
+select empno, ename, hiredate, sal, round(sal * 20/100) as increment, round(sal * 120/100) as "New Salary" from empinfo where REGEXP_SUBSTR(hiredate, '\\d{4}') < 2003 and sal < 4000;
+select empno, ename, hiredate, sal, round(sal * 20/100) as increment, round(sal * 120/100) as "New Salary" from empinfo where hiredate < '2003-01-01' and sal < 4000;
+
 -- 7. Display the name of the employees who subordinate has subordinates.
+select E3.empno, E3.ename as sub_sub_name, E1.empno, E1.empname sub_name from empminfo E1 inner join empinfo E2 inner join empinfo E3 on E1.empno = E2.empno and E2.empno = E3.empno;
+
 -- 8. Display the name of the employees and their subordinate has not subordinates.
 -- 9.  Display the name of the employees and their subordinate's subordinates.
 -- 10. Display the name, salary of the employees who has got maximum and minimum salary in one row with proper heading.
