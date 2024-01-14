@@ -1,4 +1,4 @@
--- ## DBMS Assignment - 7 (DB Custom Fruntion ROW_NUMBER())
+-- ## DBMS Assignment - 7 (DB Custom Function ROW_NUMBER())
 -- ---
 
 -- ####  Table Info:
@@ -9,13 +9,19 @@
 -- 1. List the names, jobs and salaries of employees whose salary is greater than the highest salary in Operations department.
 select deptno, max(sal) from empinfo group by deptno having deptno is not null order by deptno;
 -- create a separate table 'dept_wise_sal_indexing' for 'dept-wise-sal-indexing'
+SELECT *, row_number() OVER (PARTITION BY deptno ORDER BY sal DESC) as row_index_by_sal
+		FROM empinfo where deptno is not null;
 WITH dept_wise_sal_indexing AS (
 		SELECT *, row_number() OVER (PARTITION BY deptno ORDER BY sal DESC) as row_index_by_sal
 		FROM empinfo where deptno is not null
 	)
-	SELECT ename, sal, row_index_by_sal, deptno
+	SELECT ename, sal, deptno
 		FROM dept_wise_sal_indexing
 		WHERE row_index_by_sal = 1;
+-- or
+select ename, sal, deptno from empinfo 
+	where (sal, deptno) in (select max(sal), deptno from empinfo group by deptno) 
+    order by deptno asc;
 
 -- 2. Find the department is not having any employee
 select D.deptno, D.dname from empinfo E right join deptinfo D on E.deptno = D.deptno where E.deptno is null;
@@ -82,7 +88,8 @@ select (select ename from empinfo where sal = (select max(sal) from empinfo) lim
 		(select max(sal) from empinfo) as 'Max Sal',
         (select ename from empinfo where sal = (select min(sal) from empinfo) limit 1) as  'Min Sal Emp Name',
 		(select min(sal) from empinfo) as 'Min Sal';
-
+-- or
+select ename, sal from empinfo where sal in ((select max(sal) from empinfo), (select min(sal) from empinfo));
 
 -- 11. Display the department number, member of employees in each department and the total number of employees in the company.
 select deptno, count(empno) as "employees in department", 

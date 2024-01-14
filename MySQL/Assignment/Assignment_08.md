@@ -9,7 +9,7 @@
 1. Find the job which exist in department no 30 but not in 10
 2. Find the job employees who earn the highest salary in each job type
 3. Find the most recently hired employees in each department
-4. List he department having no employees(using sub query, using outer join, using correlated sub query, and using set operation.)
+4. List the department having no employees(using sub query, using outer join, using correlated sub query, and using set operation.)
 5. Display the employee names getting salaries greater than their managers.
 6. Select the third highest earner in the emp table.
 7. Display the name of the employees whose boss has a boss.

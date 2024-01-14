@@ -63,11 +63,11 @@ insert into empinfo values(7861, 'Susmita Jana', '2022-05-20', 'clerk', 7002, 15
 insert into empinfo values(7862, 'Susovan Das', '2001-05-20', 'salesman', 7003, 150, 0, 20);
 insert into empinfo values(7865, 'Mrinmoy Jana', '2023-05-20', 'Engineer', 7007, 1500, 0, 55);
 insert into empinfo values(7866, 'Tilam Vamra', '2023-05-20', 'Engineer', 7002, 1800, 0, 55);
-insert into empinfo values(7867, 'Subhas Jana', '2055-05-20', 'salesman', 7001, 1590, 0, 20);
+insert into empinfo values(7867, 'Subhas Jana', '2023-12-31', 'salesman', 7001, 1590, 0, 20);
 -- show all data in table
 select * from empinfo;
 
 
 -- update some data in table
 update empinfo set mgrid = 7001  where empno=7007;
-update empinfo set hiredate = '2007-12-20' where empno=7342;
+update empinfo set hiredate = '2023-12-31' where empno=7867;

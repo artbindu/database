@@ -1,4 +1,4 @@
-## DBMS Assignment - 7 ()
+## DBMS Assignment - 7 (DB Custom Function ROW_NUMBER())
 ---
 
 ####  Table Info:
