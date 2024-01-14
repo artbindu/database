@@ -2,7 +2,7 @@
 -- ---
 
 -- ####  Table Info:
--- - empinfo (empno, ename, hiredate, job, mgr, sal, comm, deptno )
+-- - empinfo (empno, ename, hiredate, job, mgrid, sal, comm, deptno )
 -- - deptinfo (deptno, dname, location)
 
 -- #### Assignment List
@@ -45,7 +45,9 @@ select empno, ename, hiredate, sal, round(sal * 20/100) as increment, round(sal 
 select empno, ename, hiredate, sal, round(sal * 20/100) as increment, round(sal * 120/100) as "New Salary" from empinfo where hiredate < '2003-01-01' and sal < 4000;
 
 -- 7. Display the name of the employees who subordinate has subordinates.
-select E3.empno, E3.ename as sub_sub_name, E1.empno, E1.empname sub_name from empminfo E1 inner join empinfo E2 inner join empinfo E3 on E1.empno = E2.empno and E2.empno = E3.empno;
+select E3.empno, E3.ename, E2.empno as subordinate_1, E1.empno, E1.ename subordinate_2 
+	from empinfo E1 inner join empinfo E2 inner join empinfo E3 
+		on E1.mgrid = E2.empno and E2.mgrid = E3.empno;
 
 -- 8. Display the name of the employees and their subordinate has not subordinates.
 -- 9.  Display the name of the employees and their subordinate's subordinates.

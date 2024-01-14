@@ -2,7 +2,7 @@
 -- ---
 
 -- ####  Table Info:
--- - empinfo (empno, ename, hiredate, job, mgr, sal, comm, deptno )
+-- - empinfo (empno, ename, hiredate, job, mgrid, sal, comm, deptno )
 -- - deptinfo (deptno, dname, location)
 
 -- #### Assignment List
@@ -25,13 +25,13 @@ select E.ename as name, D.deptno
     );
 
 -- 3. List the name, employee number, their manager name and manager number.
-select E.ename as "Emp Name", E.empno as 'Emp No', E.mgr as 'Mgr Name', E1.empno as 'Mgr No'
-	from empinfo E inner join empinfo E1 on E.mgr = E1.ename
-    where E.mgr is not null;
+select E1.ename as "Emp Name", E1.empno as 'Emp No', E1.mgrid as 'Mgr Id', E2.ename as 'Mgr Name'
+	from empinfo E1 inner join empinfo E2 on E1.mgrid = E2.empno
+    where E1.mgrid is not null order by E1.empno;
 
-select E.ename as "Emp Name", E.empno as 'Emp No', E.mgr as 'Mgr Name', E1.empno as 'Mgr No'
+select E.ename as "Emp Name", E.empno as 'Emp No', E.mgrid as 'Mgr Id', E1.ename as 'Mgr Name'
 	from empinfo E, empinfo E1
-    where E.mgr = E1.ename;
+    where E.mgrid = E1.empno and E.mgrid is not null order by E.empno;
 
 -- 4. List the name of the employee job is same as 'CLERK';
 select ename from empinfo where job = 'clerk';
@@ -51,6 +51,10 @@ select D.dname, E.ename
 		select D1.dname from deptinfo D1, empinfo E1 where E1.deptno = D1.deptno and E1.ename like 'Tanmoy%'
 	);
 -- 9. Display the dept. whose salary is maximum.
+select E.deptno, D.dname, max(E.sal) as 'max sal of dept'
+	from empinfo E inner join deptinfo D on E.deptno = D.deptno
+    group by D.deptno having E.deptno is not null order by E.deptno;
+
 -- 10. Display the name of the city (location) in which 'Tanmoy' works.
 select D.location
 	from deptinfo D join empinfo E on E.deptno = D.deptno
@@ -84,12 +88,12 @@ select D.dname, D.deptno
 
 -- 15. List name, employee number and the name, employee number of the theirs manager
 select E.ename 'Emp Name', E.empno 'Emp No', E1.ename 'Manager Name', E1.empno 'Manager Emp No'
-	from empinfo E inner join empinfo E1 on E.mgr = E1.ename;
+	from empinfo E inner join empinfo E1 on E.mgrid = E1.empno;
 
 -- 16. List the name of the employee who joined in their same year of 'Gopal'
 -- select ename, hiredate from empinfo where hiredate like '2007%';
 -- Find Year - Format - '^\d{4}'
-select REGEXP_REPLACE(hiredate, '(?<=(\\d{4}))(\-\\d{2}){2}', '%') as hireyear 
+select REGEXP_REPLACE(hiredate, '(?<=(\\d{4}))(\-\\d{2}){2}', '') as hireyear 
 	from empinfo where ename like 'Gopal%';
 select ename, hiredate from empinfo 
 	where hiredate is not Null and  hiredate like (
@@ -100,7 +104,7 @@ select ename, hiredate from empinfo
 
 -- 17. List the name of the employee who joined in their same month of 'Gopal'
 -- Find Month - Format - '\-\\d{2}\-'
-select REGEXP_REPLACE(hiredate, '(^\\d{4}(?=\-\\d{2}\-))|((?<=\-\\d{2}\-)(\\d{2}))', '%') as hireyear 
+select REGEXP_REPLACE(hiredate, '(^\\d{4}(?=\-\\d{2}\-))|((?<=\-\\d{2}\-)(\\d{2}))', '') as hireyear 
 	from empinfo where ename like 'Gopal%';
 select ename, hiredate from empinfo 
 	where hiredate is not Null and  hiredate like (
@@ -126,9 +130,4 @@ select D.dname, D.deptno
 		inner join
 			(select deptno from empinfo group by deptno having deptno is not null and sum(comm) <> 0) E
         on E.deptno = D.deptno;
-
-
-
-
-
 

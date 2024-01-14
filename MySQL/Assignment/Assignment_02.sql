@@ -21,7 +21,8 @@ select min(sal) as 'Min Salary', max(sal) as 'Max Salary', avg(sal) 'Avg Salary'
 -- 9. Find the minimum and maximum and average salaries earned by a clerks.
 select min(sal) as 'Clerk Min Salary', max(sal) as 'Clerk Max Salary', avg(sal) 'Clerk Avg Salary' from empinfo where job = 'Clerk';
 -- 10. List the total number of employees and the average salaries of the different departments.
-select deptno as 'Dept No.', count(empno) as 'No of Employee', avg(sal) as 'Group Avg Salary' from empinfo group by deptno;
+select deptno as 'Dept No.', count(empno) as 'No of Employee', avg(sal) as 'Group Avg Salary' from empinfo group by deptno; 
+-- having deptno is not null;
 -- 11. Calculate total number of employees
 select count(empno) 'Total Number of Employee' from empinfo;
 -- 12. Calculate total number of managers.

@@ -2,7 +2,7 @@
 ---
 
 ####  Table Info:
-- empinfo (empno, ename, hiredate, job, mgr, sal, comm, deptno )
+- empinfo (empno, ename, hiredate, job, mgrid, sal, comm, deptno )
 - deptinfo (deptno, dname, location)
 
 #### Assignment List
