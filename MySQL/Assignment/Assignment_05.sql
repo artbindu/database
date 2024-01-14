@@ -1,4 +1,4 @@
--- ## DBMS Assignment - 5 (Master in Joining & Nested Query)
+-- ## DBMS Assignment - 5 (Master in Joining, Nested Query & Regular Expression)
 -- ---
 
 -- ####  Table Info:
@@ -87,10 +87,48 @@ select E.ename 'Emp Name', E.empno 'Emp No', E1.ename 'Manager Name', E1.empno '
 	from empinfo E inner join empinfo E1 on E.mgr = E1.ename;
 
 -- 16. List the name of the employee who joined in their same year of 'Gopal'
-select hiredate from empinfo where ename like 'Gopal%';
-select ename from empinfo 
-	where hiredate like REPLACE(select hiredate from empinfo where ename like 'Gopal%', '(\-\d{2}){2}', '');
+-- select ename, hiredate from empinfo where hiredate like '2007%';
+-- Find Year - Format - '^\d{4}'
+select REGEXP_REPLACE(hiredate, '(?<=(\\d{4}))(\-\\d{2}){2}', '%') as hireyear 
+	from empinfo where ename like 'Gopal%';
+select ename, hiredate from empinfo 
+	where hiredate is not Null and  hiredate like (
+		select REGEXP_REPLACE(hiredate, '(?<=(\\d{4}))(\-\\d{2}){2}', '%') as hireyear 
+			from empinfo 
+			where ename like 'Gopal%'
+	);
 
--- 17. List the name of the employee who joined in their same month of 'BLAKE'
--- 18. List the name of the employee who joined in their same month of 'ADAMAS'
+-- 17. List the name of the employee who joined in their same month of 'Gopal'
+-- Find Month - Format - '\-\\d{2}\-'
+select REGEXP_REPLACE(hiredate, '(^\\d{4}(?=\-\\d{2}\-))|((?<=\-\\d{2}\-)(\\d{2}))', '%') as hireyear 
+	from empinfo where ename like 'Gopal%';
+select ename, hiredate from empinfo 
+	where hiredate is not Null and  hiredate like (
+		select REGEXP_REPLACE(hiredate, '(^\\d{4}(?=\-\\d{2}\-))|((?<=\-\\d{2}\-)(\\d{2}))', '%') as hireyear 
+			from empinfo 
+			where ename like 'Gopal%'
+	);
+
+-- 18. List the name of the employee who joined in their same date of 'Gopal'
+-- Find date - Format - '\d{2}$'
+select REGEXP_REPLACE(hiredate, '(^\\d{4}\-\\d{2})?=\-\\d{2}$', '%') as hireyear 
+	from empinfo where ename like 'Gopal%';
+select ename, hiredate from empinfo 
+	where hiredate is not Null and  hiredate like (
+		select REGEXP_REPLACE(hiredate, '(^\\d{4}\-\\d{2})(?=\-\\d{2}$)', '%') as hireyear 
+				from empinfo where ename like 'Gopal%'
+	);   
+    
 -- 19. List the name of the department who gets commission.
+select D.dname, D.deptno
+	from 
+			deptinfo D 
+		inner join
+			(select deptno from empinfo group by deptno having deptno is not null and sum(comm) <> 0) E
+        on E.deptno = D.deptno;
+
+
+
+
+
+
