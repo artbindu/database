@@ -81,4 +81,18 @@ select D.deptno, count(*) from empinfo E right outer join deptinfo D on E.deptno
 with dept_wise_emp_count as (
 			select D.deptno as deptid, count(*) as total_emps from empinfo E right outer join deptinfo D on E.deptno = D.deptno group by D.deptno order by D.deptno
 	) 
-    update deptinfo set no_of_emp = dept_wise_emp_count.total_emps where deptno = dept_wise_emp_count.deptid;
+    update deptinfo set no_of_emp = total_emps
+        where deptno = deptid;
+        
+select (select D.deptno as deptid, count(*) as total_emps 
+			from empinfo E right outer join deptinfo D on E.deptno = D.deptno 
+            group by D.deptno order by D.deptno);
+        
+update deptinfo D,
+	(select D.deptno as deptid, count(*) as total_emps 
+			from empinfo E right outer join deptinfo D on E.deptno = D.deptno 
+            group by D.deptno order by D.deptno) as EmpsByDept
+	set D.no_of_emp = EmpsByDept.total_emps
+	where D.deptno = EmpsByDept.deptid;
+    
+    
