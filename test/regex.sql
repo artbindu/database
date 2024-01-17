@@ -169,3 +169,26 @@ select concat('There are a total of ', count(occupation), ' ', lower(occupation)
     group by occupation 
     order by count(occupation) asc, occupation asc;
     
+-- ========================================================================
+-- New Line Validation Mode with Parameter full-stop(.): 'n'
+-- ========================================================================
+set @line1 = "First Line match.
+Second Line db.
+Third Line code
+Fourth Line extra123455";
+
+set @line2 = "First Line.\nSecond Line db.\nThird Line Code.";
+
+
+select REGEXP_LIKE(@line1, 'DB.', 'n') as 'Should return Ture';
+select REGEXP_LIKE(@line1, 'DB', 'n') as 'Should return Ture';
+
+select REGEXP_LIKE(@line1, 'SECOND', 'n') as 'Should return Ture';
+select REGEXP_LIKE(@line1, 'SECOND', 'n') as 'Should return Ture';
+
+select REGEXP_LIKE(@line1, 'extra', 'n') as 'Should return Ture';
+select REGEXP_LIKE(@line1, 'extra$', 'n') as 'Should return Ture';
+
+select REGEXP_LIKE(@line1, 'code', 'n');
+select REGEXP_LIKE(@line1, 'code', 'in');
+select REGEXP_LIKE(@line1, 'first', 'in');
