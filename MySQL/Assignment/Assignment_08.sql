@@ -70,7 +70,15 @@ select E.empno, E.ename
 	group by E.empno;
 
 -- 10. Delete the duplicate records from a table to make it single occurrence.
-
+-- Find Duplicate Value: deptinfo (deptno, dname, location)
+SELECT dname, location, COUNT(deptno)
+	FROM deptinfo GROUP BY dname, location
+	HAVING COUNT(deptno) > 1
+-- Find duplicate value: empinfo (empno, ename, hiredate, job, mgrid, sal, comm, deptno )
+Select ename, hiredate, job, mgrid, deptno, count(empno)
+	from empinfo group by ename, hiredate, job, mgrid, deptno
+	having count(empno) > 1;
+	
 -- 11. Add a new column in the dept table called no_of_emp (represents the number of employees)
 --     Now update this column value using the single command.
 Alter table deptinfo add no_of_emp int(3);
