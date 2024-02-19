@@ -4,7 +4,23 @@ insert into  EMPS value (2, 'abs', 2006);
 insert into  EMPS value (3, 'Julia', 2210);
 insert into  EMPS value (4, 'Maria', 3000);
 
+use artbindu;
 select * from EMPS;
+Desc EMPS;
+
+select * from EMPS
+	where salary > 1500 and name like "%i%";
+    
+
+
+
+
+
+
+
+
+
+
 
 select sum(salary)/count(id), sum(REPLACE(salary, '0', ''))/count(id), 
     (sum(salary)-sum(REPLACE(salary, '0', '')))/count(id) as diff 

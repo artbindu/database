@@ -192,3 +192,6 @@ select REGEXP_LIKE(@line1, 'extra$', 'n') as 'Should return Ture';
 select REGEXP_LIKE(@line1, 'code', 'n');
 select REGEXP_LIKE(@line1, 'code', 'in');
 select REGEXP_LIKE(@line1, 'first', 'in');
+
+
+
