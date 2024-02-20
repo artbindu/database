@@ -40,3 +40,23 @@ select ename as name, sal as salary from empinfo where job = 'manager' and hired
 select ename as name, sal as salary from empinfo where job = 'manager' and hiredate between '1981-01-01' and '1981-12-31';
 -- 18. List the names and salaries of all employees whose salary is even
 select ename as name, sal as salary from empinfo where (sal %2 = 0);
+
+
+
+
+set @dtFrom = '2000-01-01';
+set @dtTo = '2020-03-01';
+select * from empinfo
+	where hiredate between '2000-01-01' and '2020-03-01';
+select * from empinfo
+	where hiredate between @dtFrom and @dtTo;
+
+set @d1 = '2000/01/01';
+set @d2 = '2020/03/01';
+select REGEXP_REPLACE(@d1, '//', '-');
+
+select * from empinfo
+	where hiredate between 
+			replace(@d1, '//', '-') 
+			and 
+			replace(@d2, '//', '-');

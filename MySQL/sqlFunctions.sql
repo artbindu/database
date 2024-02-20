@@ -1,17 +1,30 @@
 
-
+drop function if exists fact;
+drop procedure if exists factFun;
 DELIMITER $$
-CREATE FUNCTION Func_Cube
-(
- Num INT
-)
-RETURNS INT 
-DETERMINISTIC
+
+create procedure factFun(IN n int, OUT m int)
 BEGIN
-    DECLARE TotalCube INT;
-    SET TotalCube = Num * Num * Num;
-    RETURN TotalCube; 
+    if(n=0 or n=1) then set m = 1;
+    else call factFun(n-1, m);
+    end if;
+END$$
+create function fact(n int) returns int no sql
+BEGIN
+	declare res int default 0;
+    call factFun(n, res);
+    return res;
 END$$
 DELIMITER ;
 
-select Func_Cube(2);
+select fact(5) as fact_val;
+
+
+show function status WHERE db = 'artbindu';
+
+
+
+
+
+
+
