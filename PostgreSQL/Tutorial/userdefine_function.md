@@ -1,9 +1,76 @@
-# PL-SQL custom functions
+# PL-SQL Controle Statements and Custom Functions
+
+
 
 ### Basic DataTypes
 ```sql
 
 ```
+
+## [PL-SQL Controle Statements](https://www.techstrikers.com/PLSQL/pl-sql-case-statement.php)
+### IF Statement
+```sql
+IF (condition) then
+	Statement;
+END IF;
+```
+### IF-ELSE Statement
+```sql
+IF (condition) then
+	Statement;
+ELSE
+	Statement;
+END IF;
+```
+### Nested-IF Statement
+```sql
+IF (condition1) then
+	Statement;
+ELSEIF (condition2)
+	Statement;
+... ... ...
+ELSE
+	Statement;
+END IF;
+```
+`or`
+```sql
+IF (condition1) then
+	IF (condition11) then
+		Statement;
+	ELSEIF (condition12) then
+		Statement;
+	... ... ...
+	ELSE
+		Statement;
+	END IF;
+ELSEIF (condition2) then
+	Statement;
+... ... ...
+ELSE
+	Statement;
+END IF;
+```
+
+### CASE Statement
+```sql
+	CASE (expression)
+		WHEN (condition1) then
+			Statement;
+		WHEN (condition2) then
+			Statement;
+		... ... ...
+		ELSE
+			Statement;
+```
+
+### LOOP Statement
+### WHILE LOOP Statement
+### FOR LOOP Statement
+### LOOP Break Statement
+### Continue Statement
+### GOTO Statement
+
 
 ### Function: Welcome Message
 ```sql
@@ -111,8 +178,7 @@ $$ LANGUAGE plpgsql;
 select addition(2, 3) as sumValue;
 select addition(234, 124) as sumValue;
 ```
-
-- alternative way to define function
+`or`
 ```sql
 drop function if exists addition(int, int);
 create or replace function addition(a int, b int)
@@ -124,20 +190,6 @@ $BODY$ -- write anything(without space) between two '$' symbol. But text should 
         return a + b;
     END;
 $BODY$;
-
-select addition(2, 3) as add_data;
-```
-```sql
-drop function if exists addition(int, int);
-create or replace function addition(int, int)
-returns int
-LANGUAGE plpgsql
-as
-$FunctionBody$ -- write anything(without space) between two '$' symbol. But text should be identical both beginning & end position 
-    BEGIN
-        return $1 + $2;
-    END;
-$FunctionBody$;
 
 select addition(2, 3) as add_data;
 ```
@@ -234,13 +286,9 @@ $BODY$
 		grd text;
 		BEGIN
 			if($1 <= 55) then grd := 'Below Agerage';
-			else
-				if($1 > 55 and $1 <= 75) then grd := 'Agerage';
-				else 
-					if($1 > 75 and $1 <= 90) then grd := 'Good';
-					else grd := 'Excellent';
-					end if;
-				end if;
+			elseif($1 > 55 and $1 <= 75) then grd := 'Agerage';
+			elseif($1 > 75 and $1 <= 90) then grd := 'Good';
+			else grd := 'Excellent';
 			end if;
 			return grd;
 		END;
@@ -292,20 +340,16 @@ $BODY$
 		i int;
 		BEGIN
 			if(n <= 0) then res := 'Invalid Input';
+			elseif(n = 1) then res := 'Not a Prime or Composite';
+			elseif(n = 2 or n = 3) then res := res;
 			else
-				if(n = 1) then res := 'Not a Prime or Composite';
-				else 
-					if(n = 2 or n = 3) then res := res;
-					else
-						for i in 2 .. (sqrt(n)+1)::int Loop
-							raise notice 'div by: mod(%, %)', n, i;
-							if(mod(n, i) = 0) then res := 'Composite Number';
-							end if;
-                            -- for loop break statement
-							exit when res like 'Composite Number';
-						end loop;
+				for i in 2 .. (sqrt(n)+1)::int Loop
+					raise notice 'div by: mod(%, %)', n, i;
+					if(mod(n, i) = 0) then res := 'Composite Number';
 					end if;
-				end if;
+					-- for loop break statement
+					exit when res like 'Composite Number';
+				end loop;
 			end if;
 			return res;
 		END;
@@ -332,16 +376,14 @@ $body$
 		res text := (f0::text || ', ' || f1::text);
 		BEGIN
 			if($1 = 0) then return f0::text;
+			elseif($1 = 1) then return res;
 			else
-				if($1 = 1) then return res;
-				else
-					for i in 2 .. $1 loop
-						f := f1 + f0;
-						f0 := f1; f1 := f;
-						res := (res || ', ' || f);
-					end loop;
-					return res;
-				end if;
+				for i in 2 .. $1 loop
+					f := f1 + f0;
+					f0 := f1; f1 := f;
+					res := (res || ', ' || f);
+				end loop;
+				return res;
 			end if;
 		END;
 $body$;
@@ -429,22 +471,19 @@ $CHECKPRIME$
 		i int; _flag boolean := false;
 		BEGIN
 			if(n<=0 or n=1) then return false;
+			elseif(n=2 or n=3) then return true;
 			else
-				if(n=2 or n=3) then return true;
-				else
-					for i in 2 .. (sqrt(n)+1)::int LOOP
-						if(mod(n, i) = 0) then 
-							_flag := true;
-						end if;
-						exit when _flag = true;
-					end LOOP;
-					return _flag;
-				end if;
+				for i in 2 .. (sqrt(n)+1)::int LOOP
+					if(mod(n, i) = 0) then 
+						_flag := true;
+					end if;
+					exit when _flag = true;
+				end LOOP;
+				return _flag;
 			end if;
 		END;
 $CHECKPRIME$;
-```
-```sql
+
 -- Pass Interval and return all Primes within that interval
 drop function if exists findPrimesInInterval(int, int);
 create or replace function findPrimesInInterval(int, int)
@@ -518,47 +557,271 @@ select getWorkingDays('2024-02-01 14:00:00'::timestamp, '2024-03-01 13:00:00'::t
 -- output: 22
 ```
 
+### Function: Leap Year Validation
+```sql
+drop function if exists isLeapYear(INT);
+create or replace function isLeapYear(INT)
+returns boolean
+language plpgsql AS
+$BODY$
+	BEGIN
+		if(mod($1, 100) = 0 and mod($1, 400) = 0) then return true;
+		elseif(mod($1, 100) <> 0 and mod($1, 4) = 0) then return true;
+		else return false;
+		end if;
+	END;;
+$BODY$;
+
+select isLeapYear(2023), isLeapYear(2024), 
+		isLeapYear(1900), isLeapYear(2000);
+-- output: false	true	false	true
+```
+
 ### Function: Factorial n
 ```sql
+drop function if exists fact(INT);
+create or replace function fact(INT)
+returns INT
+language PLPGSQL AS
+$BODY$
+	DECLARE
+		res INTEGER := 1; i INT;
+		BEGIN
+			if(mod($1, 2) = 1) then res:= (($1/2)::INT + 1);
+			end if;
+			for i in 1 .. ($1/2)::INT LOOP
+				res := (res * i * ($1-i+1));
+			end LOOP;
+			return res;
+		END;
+$BODY$;
+
+select fact(12);
+-- output: 479001600
 ```
 
 ### Function: Calculate nCr & nPr
+- Hints: nCr = n! / r! * (n – r)!
+- Hints: nPr = n! / (n−r)!
 ```sql
-```
+drop function if exists nCr(INT, INT);
+create or replace function nCr(INT, INT)
+returns INTEGER
+language plpgsql AS
+$BODY$
+	DECLARE
+		res INTEGER := 1;
+		BEGIN
+			return (fact($1)/(fact($2) * fact($1-$2)));
+		END;
+$BODY$;
 
-### Function: Leap Year Validation
+select nCr(5,2);
+-- output: 10
+```
 ```sql
+drop function if exists nPr(INT, INT);
+create or replace function nPr(INT, INT)
+returns INTEGER
+language plpgsql AS
+$BODY$
+	DECLARE
+		res INTEGER := 1;
+		BEGIN
+			return (fact($1)/fact($1-$2));
+		END;
+$BODY$;
+
+select nPr(5,2);
+-- output: 20
 ```
 
 ## Recursive Function
 ### Function: compute F(x,y); where: if y<=x then F(x,y)=F(x-y,y) + 1 othrwise F(x,y)=0
 ```sql
-```
+drop function if exists F(real, real);
+create or replace function F(real, real)
+returns real
+language plpgsql AS
+$BODY$
+	BEGIN 
+		if($2 <= $1) then 
+			return (F($1-$2, $2) + 1);
+		else return 0;
+		end if;
+	END;
+$BODY$;
 
-### Function: F(n,r): where: F(n,r) = F(n-1,r) + F(n-1,r-1) if n=0 or r=0 or both then F(n,r)= 0
-```sql
+drop function if exists recFun(real, real);
+create or replace function recFun(real, real)
+returns real
+language plpgsql AS
+$BODY$
+	BEGIN
+		return F($1, $2);
+	END;
+$BODY$;
+
+select recFun(5, 3);
+-- output: 1
 ```
 
 ### Function: compute lambda(n): where if n>1 lambda(n)= lambda(n/2) + 1 else lambda(n)= 0
 ```sql
+drop function if exists lambda(INT);
+create or replace function lambda(INT)
+returns real
+language plpgsql AS
+$BODY$
+	BEGIN 
+		if($1>1) then 
+			return (lambda(($1/2)::INT) + 1);
+		else return 0;
+		end if;
+	END;
+$BODY$;
+
+drop function if exists recFun(INT);
+create or replace function recFun(INT)
+returns real
+language plpgsql AS
+$BODY$
+	BEGIN
+		return lambda($1);
+	END;
+$BODY$;
+
+select recFun(18);
+-- output: 4
 ```
 
 ### Function: Fibonacci series using recursive Function
 ```sql
+drop function if exists recFibonacciCall(INT, INT, INT);
+create or replace function recFibonacciCall(f0 INT, f1 INT, c INT)
+returns TEXT
+language plpgsql AS
+$BODY$
+	BEGIN
+		if(c = 0) then return '';
+		else
+			return (', ' || (f1+f0)::TEXT || recFibonacciCall(f1, (f0+f1), (c-1)));
+		end if;
+	END;
+$BODY$;
+
+drop function if exists rFibonacci(INT);
+create or replace function rFibonacci(INT)
+returns TEXT
+language plpgsql AS
+$BODY$
+	DECLARE
+		f0 INT :=0; f1 INT := 1;
+		BEGIN
+			if($1 = 0) then return f0::TEXT;
+			else
+				return (f0::TEXT || ', ' || f1::TEXT || recFibonacciCall(f0, f1, ($1-1)));
+			end if;
+		END;
+$BODY$;
+
+select rFibonacci(7);
+-- output: "0, 1, 1, 2, 3, 5, 8, 13"
 ```
 
 ### Function: factorial of a natural number using recursive function
 ```sql
+drop function if exists recFactCall(INT);
+create or replace function recFactCall(n INT)
+returns INT
+language plpgsql AS
+$BODY$
+	DECLARE
+		m INT := (n-1)::INT;
+		BEGIN
+			if(n = 1 or n=0) then return 1;
+			else 
+				return n * recFactCall(m);
+			end if;
+		END;
+$BODY$;
+
+drop function if exists rFact(INT);
+create or replace function rFact(n INT)
+returns INT
+language plpgsql AS
+$BODY$
+	BEGIN
+		return recFactCall(n);
+	END;
+$BODY$;
+
+select rFact(6), rFact(5);
+-- output: 720	120
 ```
 
 ### Function: GCD(a,b) using recursive function
 ```sql
+drop function if exists recGCDCall(INT, INT);
+create or replace function recGCDCall(INT, INT)
+returns INT
+language plpgsql AS
+$BODY$
+	DECLARE
+		t INT;
+		BEGIN
+			t := mod($1, $2);
+			if(t=0) then return $2;
+			else return recGCDCall($2, t);
+			end if;
+		END;
+$BODY$;
+
+drop function if exists rGCD(INT, INT);
+create or replace function rGCD(m INT, n INT)
+returns INT
+language plpgsql AS
+$BODY$
+	DECLARE
+		t INT;
+		BEGIN
+			if(n>m) then 
+				t := n; n := m; m := t;
+			end if;
+			return recGCDCall(m,n);
+		END;
+$BODY$;
+
+select rGCD(16, 18);
+-- output: 2
 ```
 
-### Function: 'tower of Honai' using recursive function
+### Function: postgresql recursive call validation
+- Maximum 730 Plpgsql recursive call is happening 
 ```sql
-```
+drop function if exists recInitialPos(INT);
+create or replace function recInitialPos(INT)
+returns INT
+language plpgsql AS
+$BODY$
+	BEGIN
+		-- raise notice 'Pos: %', $1; 
+		if($1 = 1) then return 1;
+		else return $1 + recInitialPos($1-1);
+		end if;
+	END;
+$BODY$;
 
-### Function: 
-```sql
+drop function if exists rInitial(INT);
+create or replace function rInitial(INT)
+returns INT
+language plpgsql AS
+$BODY$
+	BEGIN
+		return recInitialPos($1);
+	END;
+$BODY$;
+
+select rInitial(730);
+-- output: 266815
 ```
