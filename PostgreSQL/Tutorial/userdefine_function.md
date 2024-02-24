@@ -11,44 +11,44 @@
 ### IF Statement
 ```sql
 IF (condition) then
-	Statement;
+	statement;
 END IF;
 ```
 ### IF-ELSE Statement
 ```sql
 IF (condition) then
-	Statement;
+	statement;
 ELSE
-	Statement;
+	statement;
 END IF;
 ```
 ### Nested-IF Statement
 ```sql
 IF (condition1) then
-	Statement;
+	statement;
 ELSEIF (condition2)
-	Statement;
+	statement;
 ... ... ...
 ELSE
-	Statement;
+	statement;
 END IF;
 ```
 `or`
 ```sql
 IF (condition1) then
 	IF (condition11) then
-		Statement;
+		statement;
 	ELSEIF (condition12) then
-		Statement;
+		statement;
 	... ... ...
 	ELSE
-		Statement;
+		statement;
 	END IF;
 ELSEIF (condition2) then
-	Statement;
+	statement;
 ... ... ...
 ELSE
-	Statement;
+	statement;
 END IF;
 ```
 
@@ -56,20 +56,100 @@ END IF;
 ```sql
 	CASE (expression)
 		WHEN (condition1) then
-			Statement;
+			statement;
 		WHEN (condition2) then
-			Statement;
+			statement;
 		... ... ...
 		ELSE
-			Statement;
+			statement;
+	END;
 ```
 
-### LOOP Statement
+### LOOP with BREAK Statement
+```sql
+	LOOP
+		statement;
+		if(condition) then
+			EXIT;
+		end if;
+	END LOOP;
+```
+`or`
+```sql
+	LOOP
+		statement;
+		EXIT when (condition);
+	END LOOP;
+```
 ### WHILE LOOP Statement
+```sql
+-- here condition have some breaking logic
+	WHILE (condition_with_break)
+	LOOP
+		statement;
+	END LOOP;
+```
+`or`
+```sql
+	WHILE (condition1)
+	LOOP
+		statement;
+		EXIT WHEN(condition2)
+	END LOOP;
+```
 ### FOR LOOP Statement
-### LOOP Break Statement
+```sql
+	FOR counter IN initial_Value .. final_Value LOOP
+		statement;
+	END LOOP;
+```
 ### Continue Statement
+- Generally used with in any loop to skip some statements
+```sql
+	LOOP
+		if(condition1) then
+			CONTINUE;
+		end if;
+		statement;
+		if(condition) then
+			exit;
+		end if;
+	END LOOP;
+```
+`or`
+```sql
+	WHILE (condition_with_break)
+	LOOP
+		CONTINUE when(condition);
+		statement;
+	END LOOP;
+```
+`or`
+```sql
+	FOR counter IN initial_Value .. final_Value LOOP
+		CONTINUE when(condition);
+		statement;
+	END LOOP;
+```
+
 ### GOTO Statement
+- Jump to specific section
+```sql
+	<<custom_label1>>
+	statement;
+	... ... ...
+	<<custom_label2>>
+	... ... ...
+	statement;
+	GOTO custom_label;
+	... ... ...
+	statement;
+	... ... ...
+	statement;
+	GOTO custom_labe2;
+	statement;
+	... ... ...
+```
 
 
 ### Function: Welcome Message
