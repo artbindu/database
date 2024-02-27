@@ -323,7 +323,7 @@ select checkEven(2) as EvenValidation;
 select checkEven(3) as EvenValidation;
 ```
 
-### Function: Calcuate Age
+### Function: Calculate Age
 ```sql
 drop function if exists getAgeFull(date);
 create function getAgeFull(dob date)
@@ -676,8 +676,8 @@ $BODY$
 		END;
 $BODY$;
 
-select fact(12);
--- output: 479001600
+select fact(5);
+-- output: 120
 ```
 
 ### Function: Calculate nCr & nPr
