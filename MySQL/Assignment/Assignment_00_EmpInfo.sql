@@ -1,46 +1,19 @@
 -- Show All Database details
 use artbindu;
+
 -- ===========================================================
--- deptinfo (deptno, dname, location)
-create table deptinfo (deptno int(5) primary key, dname varchar(30), location varchar(50));
--- view table info
-desc deptinfo;
+-- ===========================================================
 -- delete table
-drop table deptinfo;
--- ===========================================================
--- Insert data into 'deptinfo' table
-insert into deptinfo (deptno, dname, location) values (10, 'dept01', 'Bengaluru');
-insert into deptinfo values (15, 'dept02', 'Bengaluru');
-insert into deptinfo values (20, 'dept03', 'Kolkata');
-insert into deptinfo values (25, 'dept04', 'Kolkata');
-insert into deptinfo values (30, 'dept05', 'Bengaluru');
-insert into deptinfo values (35, 'dept06', 'Delhi');
-insert into deptinfo values (40, 'dept07', 'Mumbai');
-insert into deptinfo values (45, 'dept08', 'Kolkata');
-insert into deptinfo values (50, 'dept09', 'Kolkata');
-insert into deptinfo values (55, 'dept10', 'Guwahati');
--- show all data in table
-select * from deptinfo;
--- update some data in table
-update deptinfo set location = 'Guwahati' where deptno=55;
-
-
--- ===========================================================
--- ===========================================================
+drop table if exists empinfo;
 -- empinfo (empno, ename, hiredate, job, mgrid, sal, comm, deptno )
 create table empinfo (
             empno int(10) primary key, ename varchar(30), hiredate date, 
             job varchar(20), mgrid int(10), sal int, comm BOOLEAN, deptno int(5));
 -- view table info
 desc empinfo;
--- delete table
--- ===========================================================
-drop table empinfo;
+
 -- ===========================================================
 -- Insert data into 'empinfo' table
-
-
-
 insert into empinfo (empno, ename, hiredate, job, mgrid, sal, comm, deptno) 
             values (7001, 'Koushik Dutta', '1981-01-20', 'manager', null, 7777, 1, 25);
 insert into empinfo values(7002, 'Goutam Guha', '2008-01-20', 'manager', 7001, 2999, 0, 35);
@@ -67,7 +40,7 @@ insert into empinfo values(7867, 'Subhas Jana', '2023-12-31', 'salesman', 7001, 
 -- show all data in table
 select * from empinfo;
 
-
+-- ===========================================================
 -- update some data in table
 update empinfo set mgrid = 7001  where empno=7007;
 update empinfo set hiredate = '2023-12-31' where empno=7867;

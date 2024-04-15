@@ -16,7 +16,7 @@
     "explorer.fileNesting.expand": false,
     // Controls nesting of files in the Explorer.
     "explorer.fileNesting.patterns": {
-        "*.md": "$(capture).sql",
+        "*.md": "$(capture)*.sql",
 
     }
 }
