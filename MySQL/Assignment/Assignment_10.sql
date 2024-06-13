@@ -12,31 +12,31 @@ create table Department (id varchar(3)  primary key, name varchar(20), manager_i
 create table Works (eid varchar(5), did varchar(3));
 
 
-insert into employee (id, name, salary) values ('e01', 'P. Mishra', 20000);
-insert into employee values ('e02', 'Dipshikha Roy', 17000);
-insert into employee values ('e03', 'Nayana Sau', 18000);
-insert into employee values ('e04', 'Ayan Route', 21000);
-insert into employee values ('e05', 'Rohit Sharma', 50000);
-insert into employee values ('e06', 'Rohit Sharma', 50000);
-insert into employee values ('e07', 'Virat Barman', 15000);
-insert into employee values ('e08', 'Rajesh Khann', 8000);
-insert into employee values ('e09', 'V Sing', 80000);
-insert into employee values ('e10', 'R Jana', 9000);
-insert into employee values ('e11', 'PR Roy', 8500);
-insert into employee values ('e12', 'Prakash Khanna', 76600);
+insert into employee         (id,    name,              salary) values ('e01', 'P. Mishra', 20000);
+insert into employee values ('e02', 'Dipshikha Roy',    17000);
+insert into employee values ('e03', 'Nayana Sau',       18000);
+insert into employee values ('e04', 'Ayan Route',       21000);
+insert into employee values ('e05', 'Rohit Sharma',     50000);
+insert into employee values ('e06', 'Rohit Sharma',     50000);
+insert into employee values ('e07', 'Virat Barman',     15000);
+insert into employee values ('e08', 'Rajesh Khann',     8000 );
+insert into employee values ('e09', 'V Sing',           80000);
+insert into employee values ('e10', 'R Jana',           9000 );
+insert into employee values ('e11', 'PR Roy',           8500 );
+insert into employee values ('e12', 'Prakash Khanna',   76600);
 insert into employee values ('e13', 'Asutosh Banerjee', 55000);
-insert into employee values ('e14', 'Rajesh Mahato', 12000);
+insert into employee values ('e14', 'Rajesh Mahato',    12000);
 
-insert into Department(id, name, manager_id, floor_no) values ('d01', 'Sales', 'e01', 7);
-insert into Department(id, name, manager_id, floor_no) values ('d02', 'Developer', 'e02', 3);
-insert into Department(id, name, manager_id, floor_no) values ('d03', 'HR', 'e03', 3);
-insert into Department(id, name, manager_id, floor_no) values ('d04', 'Testing', 'e04', 9);
-insert into Department(id, name, manager_id, floor_no) values ('d05', 'Finance', 'e05', 1);
-insert into Department(id, name, manager_id, floor_no) values ('d06', 'IT', 'e06', 2);
-insert into Department(id, name, manager_id, floor_no) values ('d07', 'Production', 'e02', 5);
-insert into Department(id, name, manager_id, floor_no) values ('d08', 'Marketing', 'e01', 9);
-insert into Department(id, name, manager_id, floor_no) values ('d09', 'Administration', 'e03', 2);
-insert into Department(id, name, manager_id, floor_no) values ('d10', 'Quality Management', 'e04', 3);
+insert into Department(id,      name,               manager_id, floor_no) values ('d01', 'Sales', 'e01', 7);
+insert into values   (  'd02', 'Developer',         'e02',      3);
+insert into values   (  'd03', 'HR',                'e03',      3);
+insert into values   (  'd04', 'Testing',           'e04',      9);
+insert into values   (  'd05', 'Finance',           'e05',      1);
+insert into values   (  'd06', 'IT',                'e06',      2);
+insert into values   (  'd07', 'Production',        'e02',      5);
+insert into values   (  'd08', 'Marketing',         'e01',      9);
+insert into values   (  'd09', 'Administration',    'e03',      2);
+insert into values   (  'd10', 'Quality Management','e04',      3);
 
 insert into Works (eid, did) values ();
 

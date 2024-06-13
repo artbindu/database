@@ -44,3 +44,5 @@ select * from empinfo;
 -- update some data in table
 update empinfo set mgrid = 7001  where empno=7007;
 update empinfo set hiredate = '2023-12-31' where empno=7867;
+
+
